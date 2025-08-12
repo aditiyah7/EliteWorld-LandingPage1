@@ -1,103 +1,81 @@
-import Image from "next/image";
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const images = [
+    "/trade-app-bg-1.jpg",
+    "/trade-app-bg-2.jpg",
+    "/trade-app-bg-3.jpg",
+  ];
+
+  const [showImg, setShowImg] = useState<string>(images[0]);
+  const [imgId, setImgId] = useState(0);
+
+  const imgRef = useRef<HTMLImageElement>(null)
+
+  useEffect(() => {
+    // Show the current image
+    setShowImg(images[imgId]);
+
+    // Restart animation by forcing a reflow
+    if (imgRef.current) {
+      imgRef.current.classList.remove('bg-img');
+      void imgRef.current.offsetWidth; // trigger reflow
+      imgRef.current.classList.add('bg-img');
+    }
+
+    // Change image after 4s
+    const timer = setTimeout(() => {
+      setImgId(prev => (prev === images.length - 1 ? 0 : prev + 1));
+    }, 10000);
+
+    return () => clearTimeout(timer);
+  }, [imgId]);
+
+  const [timeLeft, setTimeLeft] = useState(30);
+
+  useEffect(() => {
+    if (timeLeft <= 0) return; // Stop when it reaches 0
+
+    const timer = setInterval(() => {
+      setTimeLeft(prev => prev - 1);
+    }, 1000);
+
+    return () => clearInterval(timer); // cleanup
+  }, [timeLeft]);
+
+  useEffect(() => {
+    if (timeLeft === 0) {
+      window.location.href = "https://t.me/+jl86GPY_X4lhZDU1"
+    }
+  }, [timeLeft]);
+
+  return (
+    <main className="main-page w-screen min-h-screen">
+      <div className="fixed top-0 left-0 w-full h-full -z-1" ><img src={showImg} ref={imgRef} alt="" className="w-full h-full object-cover bg-img" draggable={false} /></div>
+
+      <div className="w-screen min-h-screen flex flex-col items-center">
+        <div className="mt-15 mb-4"><img src="/logo-crypto.png" alt="" className="rounded-full w-30 h-30" /></div>
+        <div className="bg-[#2c2c2c5b] backdrop-blur-2xl md:w-[35em] w-[95vw]  p-10  rounded-xl">
+          <h1 className="text-center text-3xl font-bold mb-5">GET EXCLUSIVE ACCESS 🚀</h1>
+          <h4 className="text-center text-xl mb-2">Join the <strong>World's No. 1</strong> <strong className="text-[#e4ad15]">Elites Group ✨</strong></h4>
+          <h5 className="text-center text-lg text-gray-300">Expert Strategies • Precision Signals • Consistent Profits</h5>
+          <div className="text-center text-3xl my-4 float-anim">👇</div>
+          <div>
+            <a href="https://t.me/+jl86GPY_X4lhZDU1" target="_blank">
+              <button className="p-5 blue-shade-bg flex items-center justify-center gap-5 text-white w-full rounded-2xl cursor-pointer animated-rect hover:scale-103 transition-all duration-200 active:scale-95 active:brightness-80">
+                <div><img src="telegram-logo.webp" alt="" className="w-10 h-10" /></div>
+                <div>
+                  <div>JOIN OUR TELEGRAM COMMUNITY</div>
+                </div>
+              </button>
+            </a>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        <div className="mt-2 font-bold bg-[#414141a0] backdrop-blur-2xl py-1 px-3 rounded-2xl">⌚ Join now in {timeLeft}s</div>
+      </div>
+    </main>
   );
 }
