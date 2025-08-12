@@ -38,7 +38,7 @@ body {
   }
 
   70% {
-    transform: translateY(0);
+    transform: translateY(-4px);
   }
 }
 
@@ -65,7 +65,7 @@ body {
 }
 
 .bg-img {
-  animation: imageTransition 10s ease-in-out;
+  animation: imageTransition 5s ease-in-out;
 }
 
 @keyframes imageTransition {
