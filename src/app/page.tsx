@@ -33,7 +33,7 @@ export default function Home() {
   useEffect(() => {
     const timer = setTimeout(() => {
       window.location.href = "https://t.me/+jl86GPY_X4lhZDU1";
-    }, 1000000); // ✅ 10 seconds
+    }, 10000); // ✅ 10 seconds
 
     return () => clearTimeout(timer);
   }, []);
