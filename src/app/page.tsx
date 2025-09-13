@@ -57,7 +57,7 @@ export default function Home() {
       <div className="fixed top-0 left-0 w-full h-full -z-1" ><img src={showImg} ref={imgRef} alt="" className="w-full h-full object-cover bg-img" draggable={false} /></div>
 
       <div className="w-screen min-h-screen flex flex-col items-center">
-        <div className="mt-5 mb-3"><img src="/crypto-logo2.jpg" alt="" className="rounded-full w-30 h-30" /></div>
+        <div className="mt-5 mb-3"><img src="/coding.jpg" alt="" className="rounded-full w-30 h-30" /></div>
         <div className="bg-[#2c2c2c5b] backdrop-blur-2xl md:w-[35em] w-[85vw]  p-5  rounded-xl">
           <h1 className="text-center text-[1.2em] font-bold mb-3">GET EXCLUSIVE ACCESS 🚀</h1>
           <h4 className="text-center text-lg mb-1">
