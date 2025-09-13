@@ -51,6 +51,7 @@ export default function Home() {
       window.location.href = "https://t.me/+jl86GPY_X4lhZDU1"
     }
   }, [timeLeft]);
+  
 
   return (
     <main className="main-page w-screen min-h-screen">
